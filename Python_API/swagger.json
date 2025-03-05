@@ -1,0 +1,102 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API de Usuarios",
+    "description": "API para gestionar usuarios con Flask y MySQL",
+    "version": "1.0.0"
+  },
+  "host": "localhost:5000",
+  "schemes": ["http"],
+  "paths": {
+    "/usuarios": {
+      "get": {
+        "summary": "Obtener todos los usuarios",
+        "description": "Devuelve una lista de todos los usuarios",
+        "responses": {
+          "200": {
+            "description": "Lista de usuarios obtenida correctamente"
+          }
+        }
+      },
+      "post": {
+        "summary": "Agregar un usuario",
+        "description": "Crea un nuevo usuario",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nombre": {"type": "string"},
+                "correo": {"type": "string"},
+                "password": {"type": "string"}
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Usuario agregado correctamente"
+          }
+        }
+      }
+    },
+    "/usuarios/{id}": {
+      "put": {
+        "summary": "Actualizar un usuario",
+        "description": "Actualiza un usuario existente por ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nombre": {"type": "string"},
+                "correo": {"type": "string"},
+                "password": {"type": "string"}
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuario actualizado correctamente"
+          },
+          "404": {
+            "description": "Usuario no encontrado"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Eliminar un usuario",
+        "description": "Elimina un usuario por ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuario eliminado correctamente"
+          },
+          "404": {
+            "description": "Usuario no encontrado"
+          }
+        }
+      }
+    }
+  }
+}
